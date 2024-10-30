@@ -4,7 +4,6 @@ import logging
 import streamlit as st
 from groq import Groq
 from dotenv import load_dotenv
-from IPython.display import Audio, display
 
 # Load API key from environment variables
 load_dotenv()
@@ -113,6 +112,7 @@ if st.button("Download and Summarize"):
             st.write("Downloading audio...")
             audio_path = download_audio(url)
             st.success("Audio downloaded successfully!")
+            st.audio(audio_path)  # Streamlit audio player
 
             st.write("Transcribing audio...")
             transcript_text = transcribe_audio(audio_path)
