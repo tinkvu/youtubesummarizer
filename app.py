@@ -79,7 +79,7 @@ def summarize_text(transcript_text):
             }
         ],
         temperature=1,
-        max_tokens=8192,
+        max_tokens=4000,
         top_p=1,
     )
     # Check if completion is a tuple and handle accordingly
