@@ -82,9 +82,12 @@ def summarize_text(transcript_text):
         max_tokens=8192,
         top_p=1,
     )
-    summary_text = "".join([chunk.choices[0].delta.content or "" for chunk in completion])
-    return summary_text
+     if isinstance(completion, tuple):
+        summary_text = completion[0].choices[0].delta.content  # Adjusted indexing based on your API response
+    else:
+        summary_text = "".join([chunk.choices[0].delta.content or "" for chunk in completion])
 
+    return summary_text
 # Streamlit UI
 st.title("YouTube Video Summarizer")
 url = st.text_input("Enter the YouTube video URL:")
