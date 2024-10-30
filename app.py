@@ -82,10 +82,18 @@ def summarize_text(transcript_text):
         max_tokens=8192,
         top_p=1,
     )
+    # Check if completion is a tuple and handle accordingly
     if isinstance(completion, tuple):
-        summary_text = completion[0].choices[0].delta.content  # Adjusted indexing based on your API response
+        # If it's a tuple, extract the first element (assuming it's the relevant data)
+        response = completion[0]
     else:
-        summary_text = "".join([chunk.choices[0].delta.content or "" for chunk in completion])
+        response = completion
+
+    # Ensure response has the expected structure
+    if hasattr(response, 'choices') and response.choices:
+        summary_text = "".join([chunk.choices[0].delta.content or "" for chunk in response.choices])
+    else:
+        summary_text = "Summary generation failed, no valid response received."
 
     return summary_text
 # Streamlit UI
