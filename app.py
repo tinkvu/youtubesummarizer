@@ -85,8 +85,8 @@ def summarize_text(transcript_text):
     # Check if completion is a tuple and handle accordingly
     # Check if the completion has choices
     if hasattr(completion, 'choices') and completion.choices:
-        # Extract the content from the first choice
-        summary_text = completion.choices[0].message['content']
+        # Access the first choice's message content correctly
+        summary_text = completion.choices[0].message.content  # Corrected access method
     else:
         summary_text = "Summary generation failed, no valid response received."
 
