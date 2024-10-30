@@ -73,7 +73,7 @@ def summarize_text(transcript_text):
                 "role": "system",
                 "content": (
                     f"You are an expert summarizer tasked with creating a clear, concise summary of a YouTube video.\n\n"
-                    f"### Video Transcript\n {transcription.text} \n\n"
+                    f"### Video Transcript\n {transcript_text} \n\n"
                     "Aim for a summary that is engaging and accurate, while maintaining a logical flow that would be easy for someone unfamiliar with the content to understand."
                 )
             }
@@ -106,7 +106,7 @@ if st.button("Download and Summarize"):
             st.success("Summary generated successfully!")
 
             st.subheader("Transcript")
-            st.write(transcription.text)
+            st.write(transcript_text)
 
             st.subheader("Summary")
             st.write(summary)
