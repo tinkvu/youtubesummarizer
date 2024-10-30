@@ -13,29 +13,14 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 client = Groq(api_key=GROQ_API_KEY)
 
 def download_audio(url, output_path="./"):
-    """
-    Download audio from a YouTube video using yt-dlp with a static filename.
-
-    Args:
-        url (str): YouTube video URL
-        output_path (str): Directory to save the audio file
-
-    Returns:
-        str: Path to the downloaded audio file
-    """
     try:
-        # Configure logging
         logging.basicConfig(level=logging.INFO)
         logger = logging.getLogger(__name__)
-
-        # Set static output filename
         output_file = os.path.join(output_path, 'audio.mp3')
 
-        # Remove existing file if it exists
         if os.path.exists(output_file):
             os.remove(output_file)
 
-        # Configure yt-dlp options
         ydl_opts = {
             'format': 'bestaudio/best',
             'postprocessors': [{
@@ -43,10 +28,9 @@ def download_audio(url, output_path="./"):
                 'preferredcodec': 'mp3',
                 'preferredquality': '192',
             }],
-            'outtmpl': os.path.join(output_path, 'audio'),  # No extension needed, postprocessor adds it
+            'outtmpl': os.path.join(output_path, 'audio'),
         }
 
-        # Download the audio
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.extract_info(url, download=True)
 
@@ -55,7 +39,6 @@ def download_audio(url, output_path="./"):
     except Exception as e:
         logger.error(f"An error occurred: {str(e)}")
         raise
-
 def transcribe_audio(audio_path):
     """
     Transcribe audio using Groq's Whisper model.
