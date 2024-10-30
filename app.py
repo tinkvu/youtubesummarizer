@@ -106,7 +106,7 @@ if st.button("Download and Summarize"):
             st.success("Summary generated successfully!")
 
             st.subheader("Transcript")
-            st.write(transcript_text)
+            st.write(transcription.text)
 
             st.subheader("Summary")
             st.write(summary)
