@@ -67,7 +67,7 @@ def summarize_text(transcript_text):
         str: Summary text.
     """
     completion = client.chat.completions.create(
-        model="llama3-8b-8192",
+        model="llama-3.1-70b-versatile",
         messages=[
             {
                 "role": "system",
