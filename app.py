@@ -74,7 +74,7 @@ def summarize_text(transcript_text):
                 "content": (
                     f"You are an expert summarizer tasked with creating a clear, concise summary of a YouTube video.\n\n"
                     f"### Video Transcript\n {transcript_text} \n\n"
-                    "Aim for a summary that is engaging and accurate, while maintaining a logical flow that would be easy for someone unfamiliar with the content to understand."
+                    "Aim for a summary in English that is engaging and accurate, while maintaining a logical flow that would be easy for someone unfamiliar with the content to understand."
                 )
             }
         ],
