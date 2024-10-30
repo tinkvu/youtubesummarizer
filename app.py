@@ -83,15 +83,10 @@ def summarize_text(transcript_text):
         top_p=1,
     )
     # Check if completion is a tuple and handle accordingly
-    if isinstance(completion, tuple):
-        # If it's a tuple, extract the first element (assuming it's the relevant data)
-        response = completion[0]
-    else:
-        response = completion
-
-    # Ensure response has the expected structure
-    if hasattr(response, 'choices') and response.choices:
-        summary_text = "".join([chunk.choices[0].delta.content or "" for chunk in response.choices])
+    # Check if the completion has choices
+    if hasattr(completion, 'choices') and completion.choices:
+        # Extract the content from the first choice
+        summary_text = completion.choices[0].message['content']
     else:
         summary_text = "Summary generation failed, no valid response received."
 
